@@ -1,0 +1,8 @@
+<form (submit)="handleLogin()" >
+  <input type="text" [(ngModel)]="login" name="login" placeholder="login" />
+  <input type="password" [(ngModel)]="password" name="password" placeholder="password" />
+  <input type="submit" value="Entrar">
+  <div class="alert alert-error" [hidden]="!loginMessage" >
+    {{loginMessage}}
+  </div>
+</form>

@@ -1,0 +1,34 @@
+<div class="jumbotron">
+  <form name="newCompanyForm" (submit)="manageCompany()">
+    <h3 class="title">Gestión de empresas</h3>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" [(ngModel)]="nombre" id="nombre" name="nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="fiscal">Fiscal</label>
+      <input type="text" [(ngModel)]="fiscal" id="fiscal" name="fiscal" class="form-control" />
+    </div>
+    <div class="form-group">
+      <button role="button" type="button" class="btn btn-warning" (click)="resetData()" [hidden]="!editMode">Cancelar edición</button>
+      <input type="submit" class="btn btn-default" value="Guardar" />
+    </div>
+  </form>
+</div>
+<h4 style="text-align: center;" [hidden]="!loading">Cargando listado de empresas disponibles, espera por favor...</h4>
+<div [hidden]="loading">
+  <h2>Listado de empresas</h2>
+  <ul [hidden]="listaEmpresas.length == 0" class="item-list">
+    <li class="item" *ngFor="let empresa of listaEmpresas">
+      <div class="content">
+        <h4>{{empresa.name}}</h4>
+        <p><i>{{empresa.fiscal}}</i></p>
+      </div>
+      <div class="options">
+        <button class="btn btn-warning" (click)="editCompany(empresa.id, empresa.name, empresa.fiscal)">Modificar</button>
+        <button class="btn btn-danger" (click)="deleteCompany(empresa.id)">Borrar</button>
+      </div>
+    </li>
+  </ul>
+  <h3 [hidden]="listaEmpresas.length != 0">No hay empresas en la base de datos</h3>
+</div>
